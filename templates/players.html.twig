@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<a href="/" class="btn btn-primary btn-sm" style="position:absolute;right:50px;top:20px">Home</a>
+	<h1 class="text-center my-2">{{ team.getName() }}
+		Players</h1>
+	<div style="margin-top: 30px; text-align: center">
+		<label for="addplayer">
+			<span class="btn btn-sm btn-primary">Add Player</span>
+		</label>
+	</div>
+	<div class="table-responsive mx-3">
+		<table class="table text-start align-middle table-bordered table-hover my-3">
+			<thead>
+				<tr class="">
+					<th scope="col">Name</th>
+					<th scope="col">Surname</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if players is null %}
+					<tr class="">
+						<td colspan="5" class="text-center text-danger">No players in this team yet</td>
+					</tr>
+				{% else %}
+					{% for player in players %}
+						<tr class="">
+							<td scope="col">{{ player.name }}</td>
+							<td scope="col">{{ player.surname }}</td>
+							<td scope="col">
+								<a href="#" class="btn btn-sm btn-primary">Sell</a>
+								<a href="#" class="btn btn-sm btn-primary">Buy</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+		{{ knp_pagination_render(players) }}
+	</div>
+	<input type="radio" id="addplayer" name='addplayer' hidden/>
+	<input type="radio" id="toggle-close-add" class="addplayer" name='addplayer' hidden/>
+	<div class="addplayer">
+		<h3>Add Player</h3>
+		<h5 class="text-muted">Input the Player name and ...</h5>
+		<form method="post" action="{{ path('player_add', {'team_id': team.getId()}) }}">
+			<div class="d-flex align-items-center my-2">
+				<span>Player Name:&nbsp;</span>
+				<input type="text" class="form-control" name="name" placeholder="Dustin"/>
+			</div>
+			<div class="d-flex align-items-center my-2">
+				<span>Surname:&nbsp;</span>
+				<input type="text" class="form-control" name="surname" placeholder="Hayate"/>
+			</div>
+			<div class="d-flex justify-content-center mt-4">
+				<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+				<label for="toggle-close-add" class="btn btn-primary btn-sm mx-2">Cancel</label>
+			</div>
+		</form>
+	</div>
+{% endblock %}

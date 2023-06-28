@@ -1,0 +1,140 @@
+#addteam {
+    display: none;
+}
+
+#addfaq {
+    display: none;
+}
+
+#addteam:checked~.addteam {
+    display: block;
+}
+
+.editteam-toggle:checked~.editteam {
+    display: block;
+}
+
+.delteam-toggle:checked~.delteam {
+    display: block;
+}
+
+#addplayer:checked~.addplayer {
+    display: block;
+}
+
+#addteam:checked {
+    display: block;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    opacity: 0;
+    height: 100vh;
+}
+
+.addteam {
+    display: none;
+    background-color: white;
+    padding: 30px;
+    width: 500px;
+    height: 340px;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.editteam-toggle:checked {
+    display: block;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    opacity: 0;
+    height: 100vh;
+}
+
+.editteam {
+    display: none;
+    background-color: white;
+    padding: 30px;
+    width: 500px;
+    height: 340px;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.delteam-toggle:checked {
+    display: block;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    opacity: 0;
+    height: 100vh;
+}
+
+.delteam {
+    display: none;
+    background-color: white;
+    padding: 30px;
+    width: 400px;
+    height: 200px;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#addplayer:checked {
+    display: block;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    opacity: 0;
+    height: 100vh;
+}
+
+.addplayer {
+    display: none;
+    background-color: white;
+    padding: 30px;
+    width: 450px;
+    height: 290px;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.pagination {
+    float: right;
+    margin-right: 20px;
+}
+
+.pagination span {
+    background-color: var(--bs-blue);
+    padding: 0px 5px 2px 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.pagination a {
+    color: white;
+    text-decoration: none;
+}

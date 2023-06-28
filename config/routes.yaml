@@ -3,3 +3,25 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+team_index:
+    path: /
+    controller: App\Controller\IndexController::index
+team_players:
+    path: /team/{team_id}/players
+    controller: App\Controller\TeamController::viewPlayers
+team_add:
+    path: /teams/add
+    methods: POST
+    controller: App\Controller\TeamController::addTeam
+team_edit:
+    path: /teams/edit/{team_id}
+    methods: POST
+    controller: App\Controller\TeamController::editTeam
+team_del:
+    path: /teams/del/{team_id}
+    methods: POST
+    controller: App\Controller\TeamController::delTeam
+player_add:
+    path: /playera/add/{team_id}
+    methods: POST
+    controller: App\Controller\PlayerController::addPlayer

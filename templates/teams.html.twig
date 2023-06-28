@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1 class="text-center my-2">We can see all Football Teams here</h1>
+	<div style="margin-top: 30px; text-align: center">
+		<label for="addteam">
+			<span class="btn btn-sm btn-primary">Add Team</span>
+		</label>
+	</div>
+	<div class="table-responsive mx-3">
+		<table class="table text-start align-middle table-bordered table-hover my-3">
+			<thead>
+				<tr class="">
+					<th scope="col">Name</th>
+					<th scope="col">Country</th>
+					<th scope="col">Balance</th>
+					<th scope="col">Number of Players</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if teams is empty %}
+					<tr class="">
+						<td colspan="5" class="text-center text-danger">No teams found.</td>
+					</tr>
+				{% else %}
+					{% for team in teams %}
+						<tr class="">
+							<td scope="col">{{ team.name }}</td>
+							<td scope="col">{{ team.country }}</td>
+							<td scope="col">{{ team.balance }}</td>
+							<td scope="col">{{ team.getPlayers().count() }}</td>
+							<td scope="col">
+								<a href="{{ path('team_players', {'team_id': team.getId()}) }}" class="btn btn-sm btn-primary">View Players</a>
+								<label class="btn btn-sm btn-primary" for="editteam.{{ team.getId() }}">Edit Team</label>
+
+								<input type="radio" id="editteam.{{ team.getId() }}" class="editteam-toggle" name='editteam' hidden/>
+								<input type="radio" id="toggle-close-edit" class="editteam" name='editteam' hidden/>
+								<div class="editteam">
+									<h3>Edit Team</h3>
+									<h5 class="text-muted">Edit Team name and ...</h5>
+									<form method="post" action="{{ path('team_edit', {'team_id': team.getId()}) }}">
+										<div class="d-flex align-items-center my-2">
+											<span>Team Name:&nbsp;</span>
+											<input type="text" class="form-control" name="name" value={{ team.name }} placeholder="Barcelona"/>
+										</div>
+										<div class="d-flex align-items-center my-2">
+											<span>Country:&nbsp;</span>
+											<input type="text" class="form-control" name="country" value={{ team.country }} placeholder="Spain"/>
+										</div>
+										<div class="d-flex align-items-center my-2">
+											<span>Balance(USD):&nbsp;</span>
+											<input type="number" class="form-control" name="balance" value={{ team.balance }} placeholder="99999"/>
+										</div>
+										<div class="d-flex justify-content-center mt-4">
+											<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+											<label for="toggle-close-edit" class="btn btn-primary btn-sm mx-2">Cancel</label>
+										</div>
+									</form>
+								</div>
+								<label class="btn btn-sm btn-danger" for="delteam.{{ team.getId() }}">Delete</lable>
+								<input type="radio" id="delteam.{{ team.getId() }}" class="delteam-toggle" name='delteam' hidden/>
+								<input type="radio" id="toggle-close-del" class="delteam" name='delteam' hidden/>
+								<div class="delteam">
+									<h3 class="text-dark">Are you Sure to delete
+										{{ team.name }}</h3>
+									<form method="post" action="{{ path('team_del', {'team_id': team.getId()}) }}">
+										<div class="d-flex justify-content-center mt-4">
+											<button type="submit" class="btn btn-danger btn-sm">Submit</button>
+											<label for="toggle-close-del" class="btn btn-primary btn-sm mx-2">Cancel</label>
+										</div>
+									</form>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+		{{ knp_pagination_render(teams) }}
+	</div>
+	<input type="radio" id="addteam" name='addteam'/><input type="radio" id="toggle-close-add" class="addteam" name='addteam' hidden/>
+	<div class="addteam">
+		<h3>Add Team</h3>
+		<h5 class="text-muted">Input the Team name and ...</h5>
+		<form method="post" action="{{ path('team_add') }}">
+			<div class="d-flex align-items-center my-2">
+				<span>Team Name:&nbsp;</span>
+				<input type="text" class="form-control" name="name" placeholder="Barcelona"/>
+			</div>
+			<div class="d-flex align-items-center my-2">
+				<span>Country:&nbsp;</span>
+				<input type="text" class="form-control" name="country" placeholder="Spain"/>
+			</div>
+			<div class="d-flex align-items-center my-2">
+				<span>Balance(USD):&nbsp;</span>
+				<input type="number" class="form-control" name="balance" placeholder="99999"/>
+			</div>
+			<div class="d-flex justify-content-center mt-4">
+				<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+				<label for="toggle-close-add" class="btn btn-primary btn-sm mx-2">Cancel</label>
+			</div>
+		</form>
+	</div>
+{% endblock %}
